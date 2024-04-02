@@ -1,0 +1,73 @@
+@startuml
+class models.Especie{
+    nombre:string
+    descripcion:string
+}
+class models.Recinto{
+    nombre:string
+    descripcion:string
+}
+class models.Animal{
+    nombre:string
+    especie_id:integer
+}
+class models.Cuidador{
+    nombre:string
+    especialidad:string
+}
+
+class models.Actividad{
+    nombre:string
+    dia:string
+    horario:string
+}
+class models.ActividadAnimal{
+    animal_id:integer
+    actividad_id:integer
+}
+class models.AnimalCuidador{
+    animal_id:integer
+    cuidador_id:integer
+}
+class models.CuidadorEspecie{
+    cuidador_id:integer
+    especie_id:integer
+}
+class models.EspecieRecinto{
+    especie_id:integer
+    recinto_id:integer
+}
+models.Especie "1"*--"*" models.EspecieRecinto
+models.Recinto "1"*--"*" models.EspecieRecinto
+models.Especie "1"*--"*" models.Animal
+models.Actividad "1"*--"*" models.ActividadAnimal 
+models.Animal "1"*--"*" models.ActividadAnimal 
+models.Cuidador"1"*--"*"models.CuidadorEspecie
+models.Especie "1"*--"*" models.CuidadorEspecie
+models.Animal "1"*--"*" models.AnimalCuidador 
+models.Cuidador "1"*--"*" models.AnimalCuidador 
+
+class controllers.Especie{
+    resource()
+}
+
+class controllers.Recinto{
+    resource()
+}
+
+class controllers.Animal{
+    resource()
+}
+
+class controllers.Cuidador{
+    resource()
+}
+
+class controllers.Actividad{
+    resource()
+    detalle()
+}
+
+@enduml
+'Un recinto cuenta con las condiciones apropiadas para el desarrollo de una especie y una especie agrupa animales.'
+hora de finalizacion 4:45
